@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -40,9 +41,44 @@ public class ConcesionarioBean {
 		private List<CocheBean> coches = new ArrayList<CocheBean>();
 	
 	
+		//un concesionario tiene varios trabajadores
+		@OneToMany(mappedBy="concesionario" , cascade = CascadeType.ALL)
+		private List<TrabajadorBean> trabajadores = new ArrayList<TrabajadorBean>();
+		
+		//un concesionario tiene varios trabajadores
+		@OneToMany(mappedBy="concesionario" , cascade = CascadeType.ALL)
+		private List<ReparacionesBean> reparaciones = new ArrayList<ReparacionesBean>();
+		
+		
 		/**
-		 * Operación que permite añadir alumnos a la asignatuta y esta asignatura a la lista de alumnos
-		 * @param alumno
+		 * Operación que permite añadir trabajadores al concesionario y este trabajador a la lista de coches
+		 * @param concesionario
+		 */
+		
+		public void addTrabajador(TrabajadorBean trabajador) {
+			if(!trabajadores.contains(trabajador)) {
+				trabajadores.add(trabajador);
+				trabajador.setConcesionario(this);
+			}
+		}
+		
+		
+		/**
+		 * Operación que permite añadir repareciones al concesionario y esta reparacion a la lista de reparaciones
+		 * @param concesionario
+		 */
+		
+		public void addReparacion(ReparacionesBean reparacion) {
+			if(!trabajadores.contains(reparacion)) {
+				reparaciones.add(reparacion);
+				 reparacion.setConcesionario(this);
+			}
+		}
+		
+		
+		/**
+		 * Operación que permite añadir coches al concesionario y este coche a la lista de coches
+		 * @param concesionario
 		 */
 		
 		public void AddCoche(CocheBean coche){
