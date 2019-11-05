@@ -2,9 +2,11 @@ package concesionarioMaven.inicio;
 
 import concesionarioMaven.modelo.coche.CreateCoche;
 import concesionarioMaven.modelo.concesionario.CreateConcesionario;
+import concesionarioMaven.modelo.empresa.CreateEmpresa;
 import concesionarioMaven.modelo.trabajador.CreateTrabajador;
 import concesionarioMaven.negocio.CocheBean;
 import concesionarioMaven.negocio.ConcesionarioBean;
+import concesionarioMaven.negocio.EmpresaBean;
 import concesionarioMaven.negocio.TrabajadorBean;
 
 public class Start {
@@ -17,6 +19,9 @@ public class Start {
 	 * C R E A N D O    O B J E T O S
 	 * ********************************
 	 */
+		
+	EmpresaBean seat = 	new EmpresaBean();
+	seat.setNombre("seat");
 
 	TrabajadorBean jorge = new TrabajadorBean();
 	jorge.setDNI("71726615X");
@@ -27,15 +32,11 @@ public class Start {
 	carlos.setNombre("carlos");
 	
 	
-	
-	ConcesionarioBean gijon = new ConcesionarioBean();
-	gijon.setCIF(7172L);
-	
 	ConcesionarioBean oviedo = new ConcesionarioBean();
-	oviedo.setCIF(6162L);
+	oviedo.setCIF("6162");
 	
 	ConcesionarioBean mieres = new ConcesionarioBean();
-	mieres.setCIF(5152L);
+	mieres.setCIF("5152");
 	
 	
 	
@@ -62,11 +63,10 @@ public class Start {
 	oviedo.AddCoche(ibiza);
 	mieres.AddCoche(ibiza);
 	oviedo.AddCoche(leon);
-	gijon.AddCoche(C5);
-	gijon.AddCoche(leon);
+	mieres.AddCoche(C5);
 	
 	oviedo.addTrabajador(jorge);
-	oviedo.addTrabajador(carlos);
+	mieres.addTrabajador(carlos);
 	
 	
 	/*
@@ -75,20 +75,14 @@ public class Start {
 	 * **************************************************
 	 */	
 	
-	CreateTrabajador createTrabajador = new CreateTrabajador();
-	createTrabajador.create(jorge);
-	createTrabajador.create(carlos);
+	CreateEmpresa createEmpresa = new CreateEmpresa();
+	createEmpresa.create(seat);
+	
+
 	
 	
-	CreateConcesionario createConcesionario = new CreateConcesionario();
-	createConcesionario.create(oviedo);
-	createConcesionario.create(mieres);
-	createConcesionario.create(gijon);
-	
-	CreateCoche createCoche = new CreateCoche();
-	createCoche.create(ibiza);
-	createCoche.create(leon);
-	createCoche.create(C5);
+
+
 	
 	}
 }

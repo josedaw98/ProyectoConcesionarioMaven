@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -22,7 +23,7 @@ public class ConcesionarioBean {
 
 	@Id
 	@Column 
-	private long CIF;
+	private String CIF;
 	
 	@Column
 	private String localidad;
@@ -36,11 +37,14 @@ public class ConcesionarioBean {
 	@Column
 	private String nombre;
 	
+	@ManyToOne
+	private EmpresaBean empresa;
+	
 	//un coche se vende en varios concesionarios
 		@ManyToMany(mappedBy="concesionarios", cascade = CascadeType.ALL)
 		private List<CocheBean> coches = new ArrayList<CocheBean>();
 	
-	
+
 		//un concesionario tiene varios trabajadores
 		@OneToMany(mappedBy="concesionario" , cascade = CascadeType.ALL)
 		private List<TrabajadorBean> trabajadores = new ArrayList<TrabajadorBean>();
@@ -59,7 +63,7 @@ public class ConcesionarioBean {
 			if(!trabajadores.contains(trabajador)) {
 				trabajadores.add(trabajador);
 				trabajador.setConcesionario(this);
-			}
+		}
 		}
 		
 		
@@ -67,8 +71,7 @@ public class ConcesionarioBean {
 		 * Operación que permite añadir repareciones al concesionario y esta reparacion a la lista de reparaciones
 		 * @param concesionario
 		 */
-		
-		public void addReparacion(ReparacionesBean reparacion) {
+			public void addReparacion(ReparacionesBean reparacion) {
 			if(!trabajadores.contains(reparacion)) {
 				reparaciones.add(reparacion);
 				 reparacion.setConcesionario(this);
@@ -109,11 +112,11 @@ public class ConcesionarioBean {
 		this.nombre = nombre;
 	}
 
-	public long getCIF() {
+	public String getCIF() {
 		return CIF;
 	}
 
-	public void setCIF(long cIF) {
+	public void setCIF(String cIF) {
 		CIF = cIF;
 	}
 
@@ -140,6 +143,38 @@ public class ConcesionarioBean {
 	public void setTelefono(String telefono) {
 		this.telefono = telefono;
 	}
+
+
+	public EmpresaBean getEmpresa() {
+		return empresa;
+	}
+
+
+	public void setEmpresa(EmpresaBean empresa) {
+		this.empresa = empresa;
+	}
+
+
+	public List<TrabajadorBean> getTrabajadores() {
+		return trabajadores;
+	}
+
+
+	public void setTrabajadores(List<TrabajadorBean> trabajadores) {
+		this.trabajadores = trabajadores;
+	}
+
+
+	public List<ReparacionesBean> getReparaciones() {
+		return reparaciones;
+	}
+
+
+	public void setReparaciones(List<ReparacionesBean> reparaciones) {
+		this.reparaciones = reparaciones;
+	}
+	
+	
 
 	
 
