@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -39,6 +40,7 @@ public class TrabajadorBean {
 	private int sueldoBase;
 	
 	@ManyToOne
+	@JoinColumn(name="FK_concesionario")
 	private ConcesionarioBean concesionario;
 
 	public String getDNI() {

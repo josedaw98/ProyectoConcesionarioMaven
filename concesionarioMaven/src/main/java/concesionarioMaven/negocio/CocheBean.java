@@ -40,7 +40,7 @@ public class CocheBean {
 	private int precioMinimo;
 	
 	//un coche se vende en varios concesionarios
-	@ManyToMany( cascade = CascadeType.ALL)
+	@ManyToMany(mappedBy="coches")
 	private List<ConcesionarioBean> concesionarios = new ArrayList<ConcesionarioBean>();
 
 

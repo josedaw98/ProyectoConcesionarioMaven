@@ -37,20 +37,19 @@ public class ConcesionarioBean {
 	@Column
 	private String nombre;
 	
-	@ManyToOne
-	private EmpresaBean empresa;
+
 	
 	//un coche se vende en varios concesionarios
-		@ManyToMany(mappedBy="concesionarios", cascade = CascadeType.ALL)
+		@ManyToMany
 		private List<CocheBean> coches = new ArrayList<CocheBean>();
 	
 
 		//un concesionario tiene varios trabajadores
-		@OneToMany(mappedBy="concesionario" , cascade = CascadeType.ALL)
+		@OneToMany(mappedBy="concesionario")
 		private List<TrabajadorBean> trabajadores = new ArrayList<TrabajadorBean>();
 		
 		//un concesionario tiene varios trabajadores
-		@OneToMany(mappedBy="concesionario" , cascade = CascadeType.ALL)
+		@OneToMany(mappedBy="concesionario")
 		private List<ReparacionesBean> reparaciones = new ArrayList<ReparacionesBean>();
 		
 		
@@ -142,16 +141,6 @@ public class ConcesionarioBean {
 
 	public void setTelefono(String telefono) {
 		this.telefono = telefono;
-	}
-
-
-	public EmpresaBean getEmpresa() {
-		return empresa;
-	}
-
-
-	public void setEmpresa(EmpresaBean empresa) {
-		this.empresa = empresa;
 	}
 
 
